@@ -16,7 +16,7 @@ This program allows users to export a CSV file containing the holder composition
 ### Program Preparation
 1. Install all the required software such as Java and MySQL.
 2. Install the MySQL Connector from https://dev.mysql.com/downloads/connector/j/.
-3. Add the MySQL Connector jar file to the reference library.
+3. Add the MySQL Connector jar file to the reference library. <br>
    ![image](https://github.com/RichSvK/Stock_Holder_Composition_Java/assets/87809864/72783c0b-b67e-4c57-a82b-cac5fae66786)
 
 ### Database Setup
@@ -52,13 +52,11 @@ This program allows users to export a CSV file containing the holder composition
       * If the user input 0, the program will return to the main menu.
       * If the user inputs an invalid or unavailable stock name, the program will prompt them to input again.
       * If the input is a valid stock name available in the database, the program will export a "stockName.csv" file to the "Output" folder.
-      <br>
-      ![image](https://github.com/RichSvK/Stock_Holder_Composition_Java/assets/87809864/ddeaf13a-7e6b-4344-9093-b55fcc2e48c7)
-      <br>
-      * The csv will be exported to "Output" folder
-      <br>
-      ![image](https://github.com/RichSvK/Stock_Holder_Composition_Java/assets/87809864/fb2dc76a-a429-44af-bcd1-e79cd7ced3d6)
-      <br>
+        <br>
+        ![image](https://github.com/RichSvK/Stock_Holder_Composition_Java/assets/87809864/ddeaf13a-7e6b-4344-9093-b55fcc2e48c7)
+        <br>
+        ![image](https://github.com/RichSvK/Stock_Holder_Composition_Java/assets/87809864/fb2dc76a-a429-44af-bcd1-e79cd7ced3d6)
+        <br>
       * Program will go back to main menu
       <br>
   
@@ -67,13 +65,13 @@ This program allows users to export a CSV file containing the holder composition
       * If the user inputs an invalid or out of range value, the program will prompt user to input again.
       * If the input is valid but the data is already inserted in the database, the program will display an exception of duplicate entry and return to the main menu.
       For example, I already insert "Desember.txt" to my database. If I want to insert it "Desember.txt" again to my database, it will be rejected because of duplicate entry of primary key
-      <br>
-      ![image](https://github.com/RichSvK/Stock_Holder_Composition_Java/assets/87809864/5f8f9b93-af60-449a-9840-42d183007b1f)
-      <br>
+        <br>
+        ![image](https://github.com/RichSvK/Stock_Holder_Composition_Java/assets/87809864/5f8f9b93-af60-449a-9840-42d183007b1f)
+        <br>
       * If the input is valid and the data is yet to be inserted in the database, the program will insert the data from the txt file original format from KSEI to the database.
-      <br>
-      ![image](https://github.com/RichSvK/Stock_Holder_Composition_Java/assets/87809864/5bac3c9f-684d-4e42-9b29-ec68e202b123)
-      <br>
+        <br>
+        ![image](https://github.com/RichSvK/Stock_Holder_Composition_Java/assets/87809864/5bac3c9f-684d-4e42-9b29-ec68e202b123)
+        <br>
       * Program will go back to main menu
 
     - If the input is 3, the program will return to login menu
