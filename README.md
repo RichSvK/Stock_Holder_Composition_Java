@@ -28,21 +28,21 @@ This program can export a CSV file containing the holder composition of scriptle
 2. Program will ask database name, username, and password with some validation
     * You can check the user and host of the database using "SELECT User, Host FROM mysql.user;" command in MySQL
     * If the user input "0" then the program is finished
-     <br>
-     ![image](https://github.com/RichSvK/Stock_Holder_Composition_Java/assets/87809864/3f02ee92-9f74-4f45-a5fb-42c996437337)
-     <br>   
+      <br>
+      ![image](https://github.com/RichSvK/Stock_Holder_Composition_Java/assets/87809864/3f02ee92-9f74-4f45-a5fb-42c996437337)
+      <br>   
     * If the inputted database name, username, or password is wrong then the connection is failed, the program will ask user to input again
-    <br>
-    ![image](https://github.com/RichSvK/Stock_Holder_Composition_Java/assets/87809864/e5c229d7-5342-4398-9a5a-c7830444848d)
-    <br>
-   * If the inputted database name, username, and password is correct then the connection will be established
-    <br>
-    ![image](https://github.com/RichSvK/Stock_Holder_Composition_Java/assets/87809864/75ae70a2-a239-4285-b544-6a03c43757df)
-    <br>  
+      <br>
+      ![image](https://github.com/RichSvK/Stock_Holder_Composition_Java/assets/87809864/e5c229d7-5342-4398-9a5a-c7830444848d)
+      <br>
+    * If the inputted database name, username, and password is correct then the connection will be established
+      <br>
+      ![image](https://github.com/RichSvK/Stock_Holder_Composition_Java/assets/87809864/75ae70a2-a239-4285-b544-6a03c43757df)
+      <br>  
 3. After successfully login, program will go to the main menu
-   <br>
-   ![image](https://github.com/RichSvK/Stock_Holder_Composition_Java/assets/87809864/0c7f1230-0758-4038-942e-8a45ca019852)
-   <br>
+    <br>
+    ![image](https://github.com/RichSvK/Stock_Holder_Composition_Java/assets/87809864/0c7f1230-0758-4038-942e-8a45ca019852)
+    <br>
   a. If user inputted invalid value, the program will ask user to input again
     <br>
     ![image](https://github.com/RichSvK/Stock_Holder_Composition_Java/assets/87809864/8a2fd251-12a3-482f-afde-0496a402a625)
