@@ -1,5 +1,3 @@
--- Active: 1711128350343@@127.0.0.1@3306@balance
-
 -- See User and Host --
 SELECT User, Host FROM mysql.user;
 
