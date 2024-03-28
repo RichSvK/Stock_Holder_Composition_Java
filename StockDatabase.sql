@@ -22,17 +22,17 @@ USE Balance;
 -- OT = Other --
 CREATE TABLE Stocks(
 	`Date` DATE,
-    `Code` CHAR(4),
+	`Code` CHAR(4),
 	`Local IS` BIGINT UNSIGNED,
 	`Local CP` BIGINT UNSIGNED,
 	`Local PF` BIGINT UNSIGNED,
 	`Local IB` BIGINT UNSIGNED,
 	`Local ID` BIGINT UNSIGNED,
 	`Local MF` BIGINT UNSIGNED,
-    `Local SC` BIGINT UNSIGNED,
+	`Local SC` BIGINT UNSIGNED,
 	`Local FD` BIGINT UNSIGNED,
-    `Local OT` BIGINT UNSIGNED,
-    `Foreign IS` BIGINT UNSIGNED,
+	`Local OT` BIGINT UNSIGNED,
+	`Foreign IS` BIGINT UNSIGNED,
 	`Foreign CP` BIGINT UNSIGNED,
 	`Foreign PF` BIGINT UNSIGNED,
 	`Foreign IB` BIGINT UNSIGNED,
@@ -41,7 +41,7 @@ CREATE TABLE Stocks(
 	`Foreign SC` BIGINT UNSIGNED,
 	`Foreign FD` BIGINT UNSIGNED,
 	`Foreign OT` BIGINT UNSIGNED,
-    PRIMARY KEY (`Date`, `Code`)
+	PRIMARY KEY (`Date`, `Code`)
 );
 
 -- Testing query --
