@@ -72,18 +72,24 @@ public class Menu {
 			statement = stockDB.getConnectionDB().prepareStatement(searchQuery);
 			
 			// Continue looping until the entered Stock Name is found in the database.
+			boolean valid = true;
 			do {
+				valid = true;
 				System.out.print("Stock name \u001B[31m[Type \"0\" to exit]\u001B[0m: ");
 				stockName = scan.nextLine();
 				if(stockName.equals("0")) return;
 				if(stockName.length() != 4){
 					System.out.println("Invalid Input");
+					valid = false;
 					continue;
 				}
-				System.out.println("Testing Input");
 				statement.setString(1, stockName);
 				result = statement.executeQuery();
-			} while(result == null || !result.next());
+				if(!result.next()){
+					System.out.println("Stock is not available in Database");
+					valid = false;
+				}
+			} while(!valid);
 			
 			try {
 				stockDB.export(result, stockName);
