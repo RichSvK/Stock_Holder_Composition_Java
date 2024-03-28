@@ -149,7 +149,7 @@ public class Menu {
 					System.err.println(e);
 				}
 				scan.nextLine();
-			} while(fileChoice < 1 || fileChoice > numFile);
+			} while(fileChoice < 0 || fileChoice > numFile);
 
     		if(fileChoice == 0) return;    		
     		fileInsert = new File("Data/" + listFile[fileChoice - 1]);
