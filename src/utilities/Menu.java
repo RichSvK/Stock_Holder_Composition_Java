@@ -83,6 +83,7 @@ public class Menu {
 					valid = false;
 					continue;
 				}
+				
 				statement.setString(1, stockName);
 				result = statement.executeQuery();
 				if(!result.next()){
