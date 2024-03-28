@@ -73,4 +73,3 @@ This program can export a CSV file containing the holder composition of scriptle
         <br>
       * Program will go back to main menu
    d. If the input is 3, the program will go back to login menu
-
