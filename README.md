@@ -42,11 +42,13 @@ This program can export a CSV file containing the holder composition of scriptle
 3. After successfully login, program will go to the main menu
     <br>
     ![image](https://github.com/RichSvK/Stock_Holder_Composition_Java/assets/87809864/0c7f1230-0758-4038-942e-8a45ca019852)
-    <br>
+    <br><br>
+    
   a. If user inputted invalid value, the program will ask user to input again
     <br>
     ![image](https://github.com/RichSvK/Stock_Holder_Composition_Java/assets/87809864/8a2fd251-12a3-482f-afde-0496a402a625)
-    <br>
+    <br><br>
+
   b. If the input is 1, user will enter export menu
     * If the user input 0, the program will back to main menu
     * If the user input invalid and not available in database, the program will ask user to input again
@@ -59,7 +61,8 @@ This program can export a CSV file containing the holder composition of scriptle
       ![image](https://github.com/RichSvK/Stock_Holder_Composition_Java/assets/87809864/fb2dc76a-a429-44af-bcd1-e79cd7ced3d6)
       <br>
     * Program will go back to main menu
-      <br>
+      <br><br>
+  
   c. If the input is 2, user will enter insert menu and display all file in the "Data" folder
     * If the user input 0, the program will go back to main menu
     * If the user input invalid and out of range, the program will ask user to input again
