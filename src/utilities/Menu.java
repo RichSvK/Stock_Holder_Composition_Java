@@ -68,6 +68,9 @@ public class Menu {
 		ResultSet result = null;
 		String searchQuery = null;
 		PreparedStatement statement = null;
+		clearScreen();
+		searchQuery = exportRange();
+		System.out.println("Query: "+ searchQuery);
 		try {
 			// Continue looping until the entered Stock Name is found in the database.
 			boolean valid = true;
@@ -77,13 +80,11 @@ public class Menu {
 				stockName = scan.nextLine();
 				if(stockName.equals("0")) return;
 
-				// Indonesia stock consists of 4 letter
+				// Indonesia stock code consists of 4 letter
 				if(stockName.length() != 4){
 					System.out.println("Stock name must be 4 letter");
 					valid = false;
-				} else{
-					searchQuery = exportRange();
-					System.out.println("Query: "+ searchQuery);			
+				} else{	
 					statement = stockDB.getConnectionDB().prepareStatement(searchQuery);
 					statement.setString(1, stockName);
 					result = statement.executeQuery();
@@ -131,10 +132,10 @@ public class Menu {
 	
 	private String exportRange(){
 		int choice = 0;
-		System.out.println("Export date range");
+		System.out.println("Export Date Range");
 		System.out.println("1. All Date");
 		System.out.println("2. Last Six Month");
-		System.out.println("3. Custom");
+		System.out.println("3. Custom Range");
 		do{
 			System.out.print(">> ");
 			try {
@@ -149,26 +150,66 @@ public class Menu {
 			case 1:
 				query = "SELECT * FROM Stocks WHERE `Code` = ? ORDER BY `Date`";
 				break;
+				
 			case 2:
 				query = "SELECT * FROM (SELECT * FROM Stocks WHERE `Code` = ? ORDER BY `Date` DESC LIMIT 6) AS Output ORDER BY `Date` ASC";
 				break;
 			
 			case 3:
-				String startDate = null;
-				String endDate = null; 
-				do{
-					System.out.print("Input Start Date [YYYY-MM]: ");
-					startDate = scan.nextLine();
+				String startDateString = null;
+				String endDateString = null;
+				LocalDate endDate = null;
+				LocalDate startDate = null;
+				boolean valid = false;
+
+				do {
+					do{
+						valid = true;
+						System.out.print("Input Start Date [YYYY-MM]: ");
+						startDateString = scan.nextLine();
+						if(!startDateString.matches("\\d{4}-\\d{2}")){
+							valid = false;
+							System.out.println("Inccorect Input Format");
+						} else{
+							try {
+								startDateString += "-01";
+								startDate = LocalDate.parse(startDateString);
+							} catch (Exception e) {
+								System.out.println("Invalid Month");
+								valid = false;
+							}
+						}
+					} while(!valid);
 					
-					System.out.print("Input End Date [YYYY-MM]: ");
-					endDate = scan.nextLine();
-				} while(!startDate.matches("\\d{4}-\\d{2}") || !endDate.matches("\\d{4}-\\d{2}"));
-				startDate += "-01";
-				endDate += "-01";
-				LocalDate date = LocalDate.parse(endDate);
-				date = date.plusMonths(1);
-				endDate = date.toString();
-				query = "SELECT * FROM Stocks WHERE `Code` = ? AND `Date` >= '" + startDate + "' AND `Date` < '" + endDate + "' ORDER BY `Date`";
+					do{
+						valid = true;
+						System.out.print("Input End Date [YYYY-MM]: ");
+						endDateString = scan.nextLine();
+						if(!endDateString.matches("\\d{4}-\\d{2}")){
+							valid = false;
+							System.out.println("Inccorect Input Format");
+						} else{
+							try {
+								endDateString += "-01";
+								endDate = LocalDate.parse(endDateString);
+							} catch (Exception e) {
+								System.out.println("Invalid Month");
+								valid = false;
+							}
+						}
+					} while(!valid);
+	
+					if(startDate.isAfter(endDate)){
+						valid = false;
+						System.out.println("Invalid: Start date is after end date");
+					}
+				} while (!valid);
+				
+				endDate = endDate.plusMonths(1);
+				endDateString = endDate.toString();
+
+				// This code is safe from SQL injection because we have checked the input pattern in the loop
+				query = "SELECT * FROM Stocks WHERE `Code` = ? AND `Date` >= '" + startDateString + "' AND `Date` < '" + endDateString + "' ORDER BY `Date`";
 				break;
 		}
 		return query;
@@ -187,6 +228,8 @@ public class Menu {
 			return;
 		}
 
+		clearScreen();
+
     	// Print list of file and folder in "Data" folder
     	System.out.println("List in Data Folder:");
     	for(int i = 0; i < numFile; i++) {
@@ -194,7 +237,7 @@ public class Menu {
     	}
     	
     	// File name
-		int fileChoice = 0;
+		int fileChoice = -1;
     	File fileInsert = null;
     	do{
 			do{
@@ -205,8 +248,8 @@ public class Menu {
 					System.err.println(e);
 				}
 			} while(fileChoice < 0 || fileChoice > numFile);
-
-    		if(fileChoice == 0) return;    		
+			
+			if(fileChoice == 0) return;
     		fileInsert = new File("Data/" + listFile[fileChoice - 1]);
     	} while(!fileInsert.exists() && !fileInsert.isFile());
     	
