@@ -97,7 +97,7 @@ public class Menu {
 			
 			try {
 				stockDB.export(result, stockName);
-			} catch (IOException e) {
+			} catch (IOException  | SQLException e) {
 				System.err.println(e);
 			}
 			result.close();
