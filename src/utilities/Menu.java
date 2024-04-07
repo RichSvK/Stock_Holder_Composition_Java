@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import database.StockDatabase;
 //import java.sql.Statement;
@@ -56,7 +57,7 @@ public class Menu {
 			System.out.print(">> ");
 			try {
 				choice = Integer.parseInt(scan.nextLine());
-			} catch (Exception e) {
+			} catch (InputMismatchException e) {
 				System.err.println("Invalid");
 			}
 		} while(choice < 1 || choice > 3);
@@ -140,7 +141,7 @@ public class Menu {
 			System.out.print(">> ");
 			try {
 				choice = Integer.parseInt(scan.nextLine());
-			} catch (Exception e) {
+			} catch (InputMismatchException e) {
 				System.err.println(e);
 			}
 		} while(choice < 1 || choice > 3);
@@ -244,7 +245,7 @@ public class Menu {
 				System.out.printf("Input file [1 - %d] to be inserted \u001B[31m[Type \"0\" to exit]\u001B[0m: ", numFile);
 				try {
 					fileChoice = Integer.parseInt(scan.nextLine());
-				} catch (Exception e) {
+				} catch (InputMismatchException e) {
 					System.err.println(e);
 				}
 			} while(fileChoice < 0 || fileChoice > numFile);
