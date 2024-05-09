@@ -93,24 +93,11 @@ public class StockDatabase {
 		System.out.printf("File %s.csv has been exported\n", stockName);
 	}
 	
-	public void insertFile(File fileInsert) throws FileNotFoundException, SQLException {
-    	// Use StringBuilder to make more the query string
-    	// Reasons: StringBuilder is more efficient in terms of memory than "String" if we modify it multiple times
-    	// Or we can manually write all the "?" in the query
-    	String insertQuery = null;
-    	/*
-	    	StringBuilder queryBuilder= new StringBuilder("INSERT INTO Kepemilikan VALUES (?");
-	    	for(int i = 1; i < size; i++) {
-	    		queryBuilder.append(", ?");
-	    	}
-	    	queryBuilder.append(")");
-	    	insertQuery = queryBuilder.toString();
-    	*/
-    	
-    	insertQuery = "INSERT INTO Stocks VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    	
-    	// Scanner to scan the file
-    	Scanner fileScanner = new Scanner(new File("Data/" + fileInsert.getName()));
+   public void insertFile(File fileInsert) throws FileNotFoundException, SQLException {
+		String insertQuery = "INSERT INTO Stocks VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		
+		// Scanner to scan the file
+		Scanner fileScanner = new Scanner(new File("Data/" + fileInsert.getName()));
     	
 		// Make Prepared Statement
 		PreparedStatement statement = connection.prepareStatement(insertQuery);
@@ -121,46 +108,47 @@ public class StockDatabase {
 		int size = 0;
 		SimpleDateFormat inputFormat = new SimpleDateFormat("dd-MMM-yyyy");
 		SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+
 		// Loop while file has next line to read
-        while(fileScanner.hasNextLine()) {
-        	lineData = fileScanner.nextLine();
-        	String[] temp = lineData.split("\\|");
-        	
-        	// If the type is not 'EQUITY', break out of the loop because I only want to insert stocks into the database.
-        	if(!temp[2].equals("EQUITY")) break;
-        	
-        	// If the total letter of stock Code is not equal to 4 than continue (Indonesian Normal Stock only have 4 letter) 
-        	if(temp[1].length() != 4) continue;
-        	
+		while(fileScanner.hasNextLine()) {
+			lineData = fileScanner.nextLine();
+			String[] temp = lineData.split("\\|");
+			
+			// If the type is not 'EQUITY', break out of the loop because I only want to insert stocks into the database.
+			if(!temp[2].equals("EQUITY")) break;
+			
+			// If the total letter of stock Code is not equal to 4 than continue (Indonesian Normal Stock only have 4 letter) 
+			if(temp[1].length() != 4) continue;
+			
 			Date date = null;
 			int columnDatabase = 1;
-        	try {
+			try {
 				date = inputFormat.parse(temp[0]);
 				String formattedDate = outputFormat.format(date);
 				date = outputFormat.parse(formattedDate);
 				java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-	        	
+				
 				// Set the parameter value
 				statement.setDate(columnDatabase++, sqlDate);
-	        	statement.setString(columnDatabase++, temp[1]);
-	        	size = temp.length - 1;
-	        	for(int i = 5; i < size; i++) {
-	        		// Skip "Total Local" Column
-	        		if(i == 14) continue;
-	        		statement.setLong(columnDatabase++, Long.parseLong(temp[i]));
-	        	}
-	        	
-	        	// Execute the statement to database
-	        	statement.executeUpdate();
+				statement.setString(columnDatabase++, temp[1]);
+				size = temp.length - 1;
+				for(int i = 5; i < size; i++) {
+					// Skip "Total Local" Column
+					if(i == 14) continue;
+					statement.setLong(columnDatabase++, Long.parseLong(temp[i]));
+				}
+			
+				// Execute the statement to database
+				statement.executeUpdate();
 			} catch (ParseException e) {
 				System.err.println(e);
 			}
-        }
+		}
         
-        // Close the statement
-        statement.close();
+		// Close the statement
+		statement.close();
 
-    	// Close file scanner
-    	fileScanner.close();
+		// Close file scanner
+		fileScanner.close();
 	}
 }
